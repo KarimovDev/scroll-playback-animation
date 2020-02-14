@@ -1,0 +1,44 @@
+{
+  "name": "scroll-playback-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development && webpack --mode development",
+    "build": "cross-env NODE_ENV=production && webpack --mode production",
+    "watch": "cross-env NODE_ENV=development && webpack --mode development --watch",
+    "start": "cross-env NODE_ENV=development && webpack-dev-server --mode development",
+    "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"
+  },
+  "keywords": [
+    "scroll",
+    "animation",
+    "playback",
+    "video"
+  ],
+  "author": "KarimovDev",
+  "license": "ISC",
+  "dependencies": {
+    "gsap": "^2.1.3",
+    "normalize.css": "^8.0.1",
+    "scrollmagic": "^2.0.7",
+    "scrollmagic-plugin-gsap": "^1.0.4"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.0",
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.0.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "sass-loader": "^8.0.2",
+    "terser-webpack-plugin": "^2.3.4",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}

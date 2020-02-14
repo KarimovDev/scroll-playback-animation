@@ -1,0 +1,92 @@
+@import '~normalize.css';
+@import 'roboto.scss';
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+p {
+  margin: 15px 0;
+}
+
+.intro {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.black, .white1, .white2, .white3 {
+  position: absolute;
+  height: 100%;
+}
+
+.black {
+  width: 100%;
+  background: black;
+}
+
+.white1, .white2, .white3 {
+  width: 33.4%;
+  background: white;
+}
+
+.white1 {
+  left: 0px;
+}
+
+.white2 {
+  left: 33.4%;
+}
+
+.white3 {
+  left: 66.8%
+}
+
+.intro video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.title1 {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  font-size: 80px;
+  transform: translateY(-90%);
+  text-align: center;
+  width: 100%;
+}
+
+.title2 {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  font-size: 90px;
+  transform: translateY(-90%);
+  text-align: center;
+  width: 100%;
+}
+
+.count1, .count2, .count3 {
+  position: absolute;
+  top: 50%;
+  font-size: 180px;
+  text-align: center;
+  width: 100%;
+  transform: translateY(-120%) scale(0, 0);
+}
+
+.count3 {
+  color: white;
+}
+
+section {
+  height: 100vh;
+  color: black;
+}
+
+section h1 {
+  padding-top: 300px;
+  text-align: center;
+  font-size: 80px;
+}
