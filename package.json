@@ -19,7 +19,7 @@
   "author": "KarimovDev",
   "license": "ISC",
   "dependencies": {
-    "gsap": "^2.1.3",
+    "gsap": "^3.6.0",
     "normalize.css": "^8.0.1",
     "scrollmagic": "^2.0.7",
     "scrollmagic-plugin-gsap": "^1.0.4"
