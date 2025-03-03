@@ -1,4 +1,5 @@
-import './styles/styles.scss';
+import 'normalize.css';
+import './styles/styles.css';
 
 import * as ScrollMagic from 'scrollmagic';
 import { TweenMax, TimelineMax } from 'gsap';

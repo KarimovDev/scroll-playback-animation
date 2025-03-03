@@ -3,7 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -17,37 +17,15 @@ const optimization = () => {
   };
 
   if (isProd) {
-    config.minimizer = [
-      new OptimizeCssAssetWebpackPlugin(),
-      new TerserWebpackPlugin(),
-    ];
+    config.minimizer = [new CssMinimizerPlugin(), new TerserWebpackPlugin()];
   }
 
   return config;
 };
 
-const filename = ext => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
+const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
-const cssLoaders = extra => {
-  const loaders = [
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        hmr: isDev,
-        reloadAll: true,
-      },
-    },
-    'css-loader',
-  ];
-
-  if (extra) {
-    loaders.push(extra);
-  }
-
-  return loaders;
-};
-
-const babelOptions = preset => {
+const babelOptions = (preset) => {
   const opts = {
     presets: ['@babel/preset-env'],
     plugins: ['@babel/plugin-proposal-class-properties'],
@@ -74,18 +52,18 @@ const jsLoaders = () => {
 const plugins = () => {
   const base = [
     new HTMLWebpackPlugin({
-      template: './index.html',
-      minify: {
-        collapseWhitespace: isProd,
-      },
+      template: 'index.html',
+      minify: 'auto',
     }),
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, 'src/favicon.ico'),
-        to: path.resolve(__dirname, 'dist'),
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/favicon.ico'),
+          to: path.resolve(__dirname, 'dist'),
+        },
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: filename('css'),
     }),
@@ -118,36 +96,20 @@ module.exports = {
     port: 4200,
     hot: isDev,
   },
-  devtool: isDev ? 'source-map' : '',
+  devtool: isDev ? 'source-map' : false,
   plugins: plugins(),
   module: {
     rules: [
       // { test: /\.js$/, loader: 'imports-loader?define=>false' },
       {
-        test: /\.(mp4|png|jpg|svg|gif)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            esModule: false,
-          },
-        },
-      },
-      {
         test: /\.html$/,
         use: {
           loader: 'html-loader',
-          options: {
-            attrs: [':src'],
-          },
         },
       },
       {
-        test: /\.s[ac]ss$/,
-        use: cssLoaders('sass-loader'),
-      },
-      {
-        test: /\.(ttf|woff|woff2|eot)$/,
-        use: ['file-loader'],
+        test: /.s?css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       // {
       //   test: /\.js$/,
